@@ -20,4 +20,5 @@ class Program
         Console.WriteLine($"Age : {age}");
         Console.WriteLine($"City: {city}");
     }
+
 }
