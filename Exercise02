@@ -1,0 +1,57 @@
+﻿using System;
+
+class FlexibleStats
+{
+    static void Main()
+    {
+        int count = 0;
+        long sum = 0;           // use long to be safe with many/large ints
+        int min = 0;
+        int max = 0;
+        bool seeded = false;
+
+        while (true)
+        {
+            Console.Write("Enter an integer (blank to finish): ");
+            string line = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(line)) break; // blank line ends input
+
+            if (int.TryParse(line.Trim(), out int value))
+            {
+                if (!seeded)
+                {
+                    // seed min and max with the first valid value
+                    min = max = value;
+                    seeded = true;
+                }
+                else
+                {
+                    if (value < min) min = value;
+                    if (value > max) max = value;
+                }
+
+                count++;
+                sum += value;
+            }
+            else
+            {
+                Console.WriteLine("Not a valid whole number. Please try again.");
+            }
+        }
+
+        if (count > 0)
+        {
+            double avg = sum / (double)count;
+            Console.WriteLine();
+            Console.WriteLine($"Count = {count}");
+            Console.WriteLine($"Min   = {min}");
+            Console.WriteLine($"Max   = {max}");
+            Console.WriteLine($"Avg   = {avg:F2}");
+        }
+        else
+        {
+            Console.WriteLine("No numbers entered.");
+        }
+    }
+}
